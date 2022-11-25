@@ -1,0 +1,688 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  title "Track"
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material1 "track material"
+      coulombFriction [
+        500
+      ]
+      softCFM 0.0001
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.07519202164954464 -0.9511925037136851 -0.29929747870495926 3.631126701944598
+  position 6.095920607019969 12.668928388506249 -12.194882907622812
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 100 100
+}
+DEF TRACKED_ROBOT Robot {
+  translation 5.11126 1.66164 -0.695384
+  rotation -0.9999999999973421 -1.8121899999951833e-06 -1.4254699999962112e-06 1.58783
+  children [
+    DEF GEOME Transform {
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0.5 0.5
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.9 0.4 0.17
+          }
+        }
+      ]
+    }
+    DEF GEOM Transform {
+      children [
+        Transform {
+          translation 0 0 0.243
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.6 0.6
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 1 0.5 0.02
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0 0.16
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0.6 0.6
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.9 0.3 0.15
+              }
+            }
+          ]
+        }
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0.6 0.6
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.9 0.4 0.17
+          }
+        }
+      ]
+    }
+    DEF LEFT_TRACK Track {
+      translation 0 0.23 0
+      rotation -1 0 0 -1.5707953071795862
+      children [
+        DEF WHEEL1_LEFT TrackWheel {
+          position -0.445 0.016
+          radius 0.125
+          children [
+            DEF TRACK_WHEEL_BIG Transform {
+              translation 0 -0.001 -0.02
+              rotation 1 0 0 1.57
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColorMap ImageTexture {
+                      url [
+                        "C:/Users/maxim/AppData/Local/Programs/Webots/projects/samples/devices/worlds/textures/tank_wheel.jpg"
+                      ]
+                    }
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    height 0.06
+                    radius 0.125
+                    subdivision 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF WHEEL2_LEFT TrackWheel {
+          position 0.445 0.015
+          radius 0.125
+          children [
+            USE TRACK_WHEEL_BIG
+          ]
+        }
+        DEF WHEEL3_LEFT TrackWheel {
+          position 0.24 -0.09
+          radius 0.08
+          children [
+            DEF TRACK_WHEEL_SMALL Transform {
+              translation 0 0 -0.02
+              rotation 1 0 0 1.57
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColorMap ImageTexture {
+                      url [
+                        "C:/Users/maxim/AppData/Local/Programs/Webots/projects/samples/devices/worlds/textures/tank_wheel.jpg"
+                      ]
+                    }
+                    roughness 1
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    height 0.06
+                    radius 0.08
+                    subdivision 20
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF WHEEL4_LEFT TrackWheel {
+          position 0.08 -0.093
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+        DEF WHEEL5_LEFT TrackWheel {
+          position -0.08 -0.093
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+        DEF WHEEL6_LEFT TrackWheel {
+          position -0.24 -0.093
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+      ]
+      name "left track"
+      contactMaterial "track material"
+      boundingObject DEF TRACK_BO Group {
+        children [
+          Transform {
+            translation 0 -0.03 0
+            rotation 1 0 0 3.14159
+            children [
+              Box {
+                size 0.53 0.33 0.08
+              }
+            ]
+          }
+          Transform {
+            translation 0.39 -0.07 0
+            rotation 0 0 -1 -0.29584530717958657
+            children [
+              Box {
+                size 0.21 0.17 0.1
+              }
+            ]
+            translationStep 0.001
+            rotationStep 0.00261799
+          }
+          Transform {
+            translation -0.4 -0.07 0
+            rotation 0 0 -1 0.311575
+            children [
+              Box {
+                size 0.21 0.17 0.09
+              }
+            ]
+            translationStep 0.001
+            rotationStep 0.00261799
+          }
+          Transform {
+            translation -0.445 0.016 0
+            rotation 1 0 0 1.5708
+            children [
+              DEF WHEEL_BO Cylinder {
+                height 0.09
+                radius 0.13
+                subdivision 16
+              }
+            ]
+          }
+          Transform {
+            translation 0.445 0.016 0
+            rotation 1 0 0 1.5708
+            children [
+              USE WHEEL_BO
+            ]
+          }
+        ]
+      }
+      physics Physics {
+      }
+      device [
+        LinearMotor {
+          name "left motor"
+        }
+      ]
+      animatedGeometry DEF ANIMATED_GEOM Group {
+        children [
+          Transform {
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.141176 0.141176 0.141176
+                  roughness 1
+                  metalness 0
+                }
+                geometry Box {
+                  size 0.06 0.01 0.11
+                }
+              }
+            ]
+          }
+          Transform {
+            translation 0 0.002 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.141176 0.141176 0.141176
+                  roughness 1
+                  metalness 0
+                }
+                geometry Box {
+                  size 0.03 0.01 0.1
+                }
+              }
+            ]
+          }
+        ]
+      }
+      geometriesCount 56
+    }
+    DEF RIGHT_TRACK Track {
+      translation 0 -0.23 0
+      rotation 0 0.7073882252434113 0.7068252250641434 3.14159
+      children [
+        DEF WHEEL1_RIGHT TrackWheel {
+          position -0.445 0.016
+          radius 0.125
+          children [
+            USE TRACK_WHEEL_BIG
+          ]
+        }
+        DEF WHEEL2_RIGHT TrackWheel {
+          position 0.445 0.016
+          radius 0.125
+          children [
+            USE TRACK_WHEEL_BIG
+          ]
+        }
+        DEF WHEEL3_RIGHT TrackWheel {
+          position 0.24 -0.09
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+        DEF WHEEL4_RIGHT TrackWheel {
+          position 0.08 -0.09
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+        DEF WHEEL5_RIGHT TrackWheel {
+          position -0.08 -0.09
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+        DEF WHEEL6_RIGHT TrackWheel {
+          position -0.24 -0.09
+          radius 0.08
+          children [
+            USE TRACK_WHEEL_SMALL
+          ]
+        }
+      ]
+      name "right track"
+      contactMaterial "track material"
+      boundingObject DEF TRACK_BO Group {
+        children [
+          Transform {
+            translation 0 -0.03 0
+            rotation 1 0 0 3.14159
+            children [
+              Box {
+                size 0.53 0.33 0.08
+              }
+            ]
+          }
+          Transform {
+            translation 0.39 -0.07 0
+            rotation 0 0 -1 -0.29584530717958657
+            children [
+              Box {
+                size 0.21 0.17 0.1
+              }
+            ]
+            translationStep 0.001
+            rotationStep 0.00261799
+          }
+          Transform {
+            translation -0.4 -0.07 0
+            rotation 0 0 -1 0.311575
+            children [
+              Box {
+                size 0.21 0.17 0.09
+              }
+            ]
+            translationStep 0.001
+            rotationStep 0.00261799
+          }
+          Transform {
+            translation -0.445 0.016 0
+            rotation 1 0 0 1.5708
+            children [
+              DEF WHEEL_BO Cylinder {
+                height 0.09
+                radius 0.13
+                subdivision 16
+              }
+            ]
+          }
+          Transform {
+            translation 0.445 0.016 0
+            rotation 1 0 0 1.5708
+            children [
+              USE WHEEL_BO
+            ]
+          }
+        ]
+      }
+      physics Physics {
+      }
+      device [
+        LinearMotor {
+          name "right motor"
+        }
+      ]
+      animatedGeometry USE ANIMATED_GEOM
+      geometriesCount 56
+    }
+  ]
+  name "tracked robot"
+  boundingObject USE GEOME
+  physics Physics {
+    density -1
+    mass 80
+  }
+  controller "my_controll_oruga"
+}
+UnevenTerrain {
+  translation 0 -0.5 0
+  size 100 5 100
+  zDimension 25
+  randomSeed 6
+  perlinNOctaves 8
+}
+SimpleTree {
+  translation -0.69 1.86 2.93
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -0.69 1.86 0.43
+  name "tree(24)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 0.14 1.66 2.93
+  name "tree(12)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 0.14 1.66 0.42
+  name "tree(22)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 0.96 1.57 2.93
+  name "tree(13)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 0.96 1.57 0.41
+  name "tree(23)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 1.76 1.46 2.93
+  name "tree(14)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 1.76 1.46 0.43
+  name "tree(21)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 2.54 1.42 2.93
+  name "tree(15)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 2.54 1.42 0.41
+  name "tree(20)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 3.37 1.37 2.93
+  name "tree(16)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 3.37 1.37 0.42
+  name "tree(19)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 4.21 1.33 2.93
+  name "tree(17)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation 4.21 1.33 0.42
+  name "tree(18)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -1.51 2.17 2.93
+  name "tree(1)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -1.51 2.17 0.41
+  name "tree(25)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -2.29 2.38 2.93
+  name "tree(2)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -2.29 2.34 0.43
+  name "tree(26)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -3.09 2.41 2.93
+  name "tree(3)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -3.09 2.41 0.43
+  name "tree(27)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -3.89 2.39 2.93
+  name "tree(4)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -3.89 2.39 0.43
+  name "tree(28)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -4.72 2.38 2.93
+  name "tree(5)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -4.72 2.38 0.42
+  name "tree(29)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -5.57 2.36 2.93
+  name "tree(6)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -5.57 2.36 0.43
+  name "tree(30)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -6.37 2.35 2.93
+  name "tree(7)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -6.37 2.35 0.43
+  name "tree(31)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -7.21 2.28 2.93
+  name "tree(8)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -7.21 2.28 0.42
+  name "tree(32)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -8.04 2.21 2.93
+  name "tree(9)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -8.04 2.21 0.41
+  name "tree(33)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -8.84 2.2 2.93
+  name "tree(10)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -8.84 2.2 0.41
+  name "tree(34)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -9.67 2.19 0.42
+  name "tree(11)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
+SimpleTree {
+  translation -9.67 2.19 2.93
+  name "tree(35)"
+  type "birch tree"
+  height 1.5
+  radius 1
+  locked FALSE
+}
